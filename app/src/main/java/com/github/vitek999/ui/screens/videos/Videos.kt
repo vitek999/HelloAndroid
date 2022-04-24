@@ -35,6 +35,7 @@ fun Videos(navController: NavController, videosViewModel: VideosViewModel) {
         when (viewAction) {
             is VideosAction.OpenVideoPage -> {
                 val videoId = (viewAction as VideosAction.OpenVideoPage).videoId
+                videosViewModel.obtainEvent(VideosEvent.ClearAction)
                 navController.navigate("${NavigationTree.Root.DetailedVideo.name}/$videoId")
             }
             null -> { }

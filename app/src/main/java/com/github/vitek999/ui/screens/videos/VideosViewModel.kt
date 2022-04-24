@@ -18,12 +18,19 @@ class VideosViewModel @Inject constructor(private val repository: VideosReposito
         when (viewEvent) {
             VideosEvent.ScreenShown -> fetchVideos()
             is VideosEvent.VideoClicked -> obtainVideoClicked(viewEvent.videoId)
+            VideosEvent.ClearAction -> clearAction()
         }
     }
 
     private fun obtainVideoClicked(videoId: Long) {
         viewModelScope.launch {
             viewAction = VideosAction.OpenVideoPage(videoId)
+        }
+    }
+
+    private fun clearAction() {
+        viewModelScope.launch {
+            viewAction = null
         }
     }
 
