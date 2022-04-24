@@ -18,4 +18,7 @@ interface VideoDao {
 
     @Delete
     fun delete(video: VideoEntity)
+
+    @Query("DELETE FROM videos")
+    fun deleteAll()
 }

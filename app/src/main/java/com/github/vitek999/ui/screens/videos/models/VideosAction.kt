@@ -1,4 +1,5 @@
 package com.github.vitek999.ui.screens.videos.models
 
-class VideosAction {
+sealed class VideosAction {
+    data class OpenVideoPage(val videoId: Long): VideosAction()
 }

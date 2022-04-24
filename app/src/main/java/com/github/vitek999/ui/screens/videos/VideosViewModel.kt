@@ -17,6 +17,13 @@ class VideosViewModel @Inject constructor(private val repository: VideosReposito
     override fun obtainEvent(viewEvent: VideosEvent) {
         when (viewEvent) {
             VideosEvent.ScreenShown -> fetchVideos()
+            is VideosEvent.VideoClicked -> obtainVideoClicked(viewEvent.videoId)
+        }
+    }
+
+    private fun obtainVideoClicked(videoId: Long) {
+        viewModelScope.launch {
+            viewAction = VideosAction.OpenVideoPage(videoId)
         }
     }
 

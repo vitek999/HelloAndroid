@@ -14,6 +14,7 @@ class VideosRepository @Inject constructor(
 ) {
     suspend fun findAll(): List<VideoDto> = withContext(Dispatchers.IO) {
         val videos = service.findAll().body() ?: emptyList()
+        dao.deleteAll()
         dao.insertAll(*videos.map(VideoDto::asEntity).toTypedArray())
         return@withContext dao.findAll().map(VideoEntity::asDto)
     }
